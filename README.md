@@ -86,6 +86,7 @@ sudo apt update && sudo apt install nginx -y
 ```
 ### Iniciar o Nginx
 Após a instalação, inicie o Nginx:
+
 ```bash
 sudo systemctl start nginx
 ```
