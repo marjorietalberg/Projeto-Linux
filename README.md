@@ -35,6 +35,8 @@ Nesta etapa, vamos configurar a infraestrutura básica na AWS criando uma VPC (V
 <img src="https://github.com/user-attachments/assets/6c2d3d54-dc21-4f78-974b-c6550b80fde2" alt="Texto alternativo" width="400" />
 <img src="https://github.com/user-attachments/assets/ae20d062-fa04-4493-a879-b7002d5f947e" alt="Texto alternativo" width="400" />
 <img src="https://github.com/user-attachments/assets/698421d2-31b3-45be-9b0e-96baf6b4ef93" alt="Texto alternativo" width="400" />
+---
+
 ### Passo 1.1.1: Criar a Instância EC2
 - Acesse o Console de Gerenciamento da AWS e vá até o serviço **EC2**.
 - Clique em **Launch Instance** e escolha a **imagem de máquina** (AMI) desejada: **Ubuntu** ou **Amazon Linux 2023**.
