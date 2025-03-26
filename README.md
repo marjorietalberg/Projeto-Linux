@@ -155,6 +155,29 @@ sudo systemctl enable nginx
 <img src="https://github.com/user-attachments/assets/ca9615ed-335e-458e-9f3e-a5383fde2992" alt="Imagem 2" width="400"/>
 
 ---
+###  📌 Torne o script executável:
+```bash
+chmod +x monitor_site.sh
+```
+### Passo 3.2: Agendar a Execução do Script
+Para rodar o script periodicamente, você pode usar o cron no Linux. O cron permite que você agende a execução de comandos ou scripts em intervalos regulares.
+
+### Criar um Bot no Telegram
+
+1. No Telegram, procure por **@BotFather** e crie um novo bot utilizando o comando `/newbot`.
+2. Ao criar o bot, você receberá um token único que será necessário para interagir com a API do Telegram. **Anote o token**, pois você precisará dele posteriormente. Exemplo de token:
+   
+   ```bash
+   7747984152:AAEuMnwI7GCiWPHiWodhrudYSDIOPiAXPPE`.
+   ```
+
+-Crie um grupo ou canal no Telegram e adicione o bot criado a esse grupo/canal.
+-Para obter o **chat ID**, envie uma mensagem para o grupo ou canal onde o bot foi adicionado e acesse a URL abaixo, substituindo 
+```
+<SEU_TOKEN>` pelo token do seu bot:
+   
+   `https://api.telegram.org/bot<SEU_TOKEN>/getUpdates`
+```
 ### Passo 3.1: Criar o Script de Monitoramento
 Crie o arquivo de script no seu servidor. No seu terminal SSH, crie um arquivo de script, como
 ```bash
