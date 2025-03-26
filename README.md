@@ -13,7 +13,7 @@
 
 Nesta etapa, vamos configurar a infraestrutura básica na AWS criando uma VPC (Virtual Private Cloud) com sub-redes públicas e privadas.
 
-### Passo 1.1: Criar a VPC<img src="https://github.com/user-attachments/assets/6c2d3d54-dc21-4f78-974b-c6550b80fde2" alt="Texto alternativo" width="400" />
+### Passo 1.1: Criar a VPC
 
 - Acesse o Console de Gerenciamento da AWS e vá até o serviço **Amazon VPC**.
 - Crie uma nova **VPC** com o CIDR Block desejado, por exemplo: `10.0.0.0/16`.
