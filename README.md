@@ -18,7 +18,7 @@
 - Crie **duas sub-redes públicas** e **duas sub-redes privadas** em diferentes **zonas de disponibilidade (AZs)**.
 - **Sub-redes públicas**: terão acesso à Internet por meio de um **Internet Gateway**.
 - **Sub-redes privadas**: não terão acesso direto à Internet, mas poderão se comunicar com a Internet por meio de um **NAT Gateway** (se necessário).
-
+Para garantir que o Nginx está rodando corretamente, use:
 - Crie uma **tabela de roteamento** para cada sub-rede:
   - Para as **sub-redes públicas**, associe a tabela de roteamento ao **Internet Gateway**, garantindo que as sub-redes públicas tenham acesso à Internet.
   - Para as **sub-redes privadas**, associe a tabela de roteamento ao **NAT Gateway**, garantindo que as sub-redes privadas possam acessar a Internet de forma segura.
@@ -132,11 +132,12 @@ sudo nginx -t
 ```bash
 sudo systemctl restart nginx
 ```
-###  Verificar o Status do Nginx
+### Verificar o Status do Nginx
 Para garantir que o Nginx está rodando corretamente, use:
-´´´bash 
+```bash
 sudo systemctl status nginx
-´´´
+
+```
 <img src="https://github.com/user-attachments/assets/5ed1981e-aaad-4315-95dd-a6e565f23f0d" alt="Descrição da Imagem" width="400">
 
 
