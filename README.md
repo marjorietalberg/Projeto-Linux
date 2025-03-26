@@ -93,6 +93,8 @@ sudo systemctl start nginx
 A partir daqui o Nginx já deve estar funcionando dentro da instância criada e pode ser acessado através do navegador com o IP público.
 
 <img src="https://github.com/user-attachments/assets/b4aefdd7-ef30-4051-ad5c-f9329eee2b56" alt="Texto Alternativo" width="400" />
+### Habilitar o Nginx para Inicialização Automática
+Caso queira que o Nginx inicie automaticamente junto com o sistema:
 
 ### 📌  Etapa 4: Criar o Site HTML
 
@@ -140,6 +142,11 @@ sudo systemctl status nginx
 ```
 <img src="https://github.com/user-attachments/assets/5ed1981e-aaad-4315-95dd-a6e565f23f0d" alt="Descrição da Imagem" width="400">
 
+###  Habilitar o Nginx para Inicialização Automática
+Caso queira que o Nginx inicie automaticamente junto com o sistema:
+```bash
+sudo systemctl enable nginx
+```
 
 ### Site 
 <img src="https://github.com/user-attachments/assets/a1a11a29-ee46-4c31-89a0-720df0475e8c" alt="Imagem 4" width="400"/>
