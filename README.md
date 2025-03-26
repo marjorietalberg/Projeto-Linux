@@ -265,6 +265,7 @@ crontab -e
 ```
 
 #### Imagem da Notificação do Site no Discord
+🔍O script de monitoramento verifica o status do site a cada minuto. Se o site estiver fora do ar, ele envia uma mensagem para o canal do Discord usando um Webhook do Discord. O script faz uma requisição HTTP para o site, e caso detecte falha, envia uma mensagem formatada com detalhes sobre o problema via uma URL de webhook configurada no Discord. Isso permite que os administradores sejam notificados automaticamente sobre a indisponibilidade do site.
 <img src="https://github.com/user-attachments/assets/f6935e8e-58bd-4381-9a4f-493156dc115c" alt="Notificação do site no Discord" width="500" />
 
 
