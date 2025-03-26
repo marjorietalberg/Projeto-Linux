@@ -143,36 +143,65 @@ nano monitor_site.sh
 ### Adicione o conteúdo do script. Aqui está um exemplo de script que verifica se o site está respondendo e envia uma notificação via Discord:
 ```bash
 #!/bin/bash
+#!/bin/bash
 
-# URL do site a ser monitorado
-URL="http://localhost"
+# Defina as variáveis
+URL="http://3.92.15.199"   # IP público da sua EC2
+WEBHOOK_URL="https://discord.com/api/webhooks/1352682870124187698/nFnBeaAeKRICnG0ksI25zqpGu6ZCmVMVgz3zxFPs1pACvJwB3uwuNq8AMFlselzeWDB5"  # Webhook do Discord
+PUBLIC_IP="3.92.15.199"    # IP público da sua EC2
+LOG_FILE="/var/log/site_script.log"  # Caminho do log
+TZ="America/Sao_Paulo"  # Fuso horário para o Brasil (ajuste conforme necessário)
 
-# Webhook do Discord
-WEBHOOK_URL="https://discord.com/api/webhooks/your-webhook-id"
+# Configura o fuso horário corretamente
+export TZ=$TZ
 
-# Enviar uma notificação de falha para o Discord
+# Criar o arquivo de log se não existir
+if [ ! -f "$LOG_FILE" ]; then
+    sudo touch $LOG_FILE
+    sudo chmod 666 $LOG_FILE
+fi
+
+# Função para registrar logs
+log_message() {
+    TIMESTAMP=$(date "+%Y-%m-%d %H:%M:%S")  # Data e hora exata
+    echo "$TIMESTAMP - $1" >> $LOG_FILE
+}
+
+# Função para enviar mensagem ao Discord
 send_notification() {
-    curl -X POST -H "Content-Type: application/json" \
-    -d "{\"content\": \"O site não está respondendo!\"}" \
-    $WEBHOOK_URL
+    curl -X POST -H "Content-Type: application/json" -d '{
+        "content": "'"$1"'"
+    }' $WEBHOOK_URL
 }
 
-# Verificar o status do site
-check_status() {
-    http_status=$(curl -s -o /dev/null -w "%{http_code}" $URL)
-    if [ $http_status -ne 200 ]; then
-        send_notification
+# Loop infinito para monitorar o site
+while true; do
+    TIMESTAMP=$(date "+%d/%m/%Y %H:%M:%S")  # Formato de data e hora BR (dia/mês/ano hora:min:seg)
+    
+    # Verifica o status do site
+    HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" $URL)
+
+    if [ "$HTTP_STATUS" -eq 200 ]; then
+        # Mensagem quando o site está no ar
+        MESSAGE="🎉 **Seu site está no ar!** 🎉\n\n🌐 O site com IP **$PUBLIC_IP** está funcionando corretamente.\n✅ Status HTTP: **200**\n⏰ Verificado em: **$TIMESTAMP**."
+        log_message "Site no ar - Status: 200"
+    else
+        # Mensagem quando o site está fora do ar
+        MESSAGE="⚠️ **Alerta!** Seu site está fora do ar! ⚠️\n\n🚨 O site **$URL** (IP: $PUBLIC_IP) não está respondendo corretamente.\n❌ Status HTTP: **$HTTP_STATUS**\n⏰ Verificado em: **$TIMESTAMP**."
+        log_message "Site fora do ar - Status: $HTTP_STATUS"
     fi
-}
 
-# Chama a função de verificação
-check_status
+    # Envia a notificação para o Discord
+    send_notification "$MESSAGE"
+
+    # Espera 60 segundos antes de rodar de novo
+    sleep 60
+done
+
+
 
 ```
 
-URL: Coloque a URL do seu site. Se for uma instância EC2, pode ser http://localhost ou o IP público.
-
-WEBHOOK_URL: Substitua por seu webhook do Discord.
 ### Torne o script executável:
 ```bash
 chmod +x monitor_site.sh
