@@ -159,10 +159,7 @@ sudo systemctl enable nginx
 <img src="https://github.com/user-attachments/assets/ca9615ed-335e-458e-9f3e-a5383fde2992" alt="Imagem 2" width="400"/>
 
 ---
-###   Torne o script executável:
-```bash
-chmod +x monitor_site.sh
-```
+
 ### Para rodar o script periodicamente, você pode usar o cron no Linux. O cron permite que você agende a execução de comandos ou scripts em intervalos regulares.
 
 ### Criar um Bot no Telegram
