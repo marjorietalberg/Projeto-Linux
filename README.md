@@ -218,6 +218,10 @@ crontab -e
 * * * * * /caminho/para/monitor_site.sh
 ```
 
+#### Imagem da Notificação do Site no Discord
+<img src="https://github.com/user-attachments/assets/f6935e8e-58bd-4381-9a4f-493156dc115c" alt="Notificação do site no Discord" width="500" />
+
+
 
 
 
