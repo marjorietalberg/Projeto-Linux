@@ -50,6 +50,8 @@ Nesta etapa, vamos configurar a infraestrutura básica na AWS criando uma VPC (V
 
 ### Passo 1.1.4: Lançar a Instância
 - Revise as configurações e clique em **Launch** para iniciar a instância EC2.
+<img src="https://github.com/user-attachments/assets/77fc3712-d94b-4311-9334-459e12e9a57e" alt="Imagem 2" width="400" />
+<img src="https://github.com/user-attachments/assets/f78a622e-0385-4e92-b001-799a37d377f2" alt="Imagem 3" width="400" />
 
 ---
 
