@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compass UOL Inspired</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #000000;
+            color: white;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1b1b1b;
+            padding: 20px 40px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+        .logo img {
+            width: 55px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .logo span {
+            font-size: 22px;
+            color: white;
+            font-weight: normal;
+            margin-left: 10px;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+        .nav-links li {
+            margin: 0 30px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 19px;
+            font-weight: normal;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .nav-links a:hover {
+            color: #ff6f00;
+            transform: scale(1.1);
+        }
+        .banner {
+            width: 100%;
+            margin-top: 100px; /* Espaço para a barra de navegação fixa */
+        }
+        .banner img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        .info-section {
+            padding: 120px 40px 40px;
+            display: flex;
+            justify-content: flex-start;
+            max-width: 1200px;
+            margin: auto;
+            font-size: 22px;
+            gap: 30px;
+        }
+        .info-title {
+            font-size: 50px;
+            color: white;
+            flex: 1;
+            text-align: left;
+        }
+        .info-text {
+            flex: 2;
+            font-size: 18px;
+            line-height: 1.8;
+            color: #bdbdbd;
+        }
+        #projeto {
+            background-color: #1b1b1b;
+            color: white;
+            padding: 80px 40px;
+            text-align: center;
+        }
+        .projeto-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: auto;
+        }
+       
+         
+        .projeto-card {
+    background: rgba(255, 255, 255, 0.356);
+    height: 480px; /*  altura */
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.15);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border: 5px solid #ff6f007f; /* Borda mais espessa */
+    margin-top: 20px; /* Para separar um pouco entre as etapas */
+}
+
+        
+        .projeto-card h3 {
+            font-size: 24px;
+            color: #ff6f00;
+            z-index: 2;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+        .projeto-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .projeto-card .text {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            color: white;
+            font-size: 18px;
+            z-index: 2;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+        }
+        .projeto-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+        }
+        #anotacoes {
+    background-color: #121212;
+    color: white;
+    padding: 80px 40px;
+}
+
+.notas-content {
+    font-size: 18px;
+    color: #bdbdbd;
+    max-width: 1200px;
+    margin: 0 auto; /* Para centralizar o bloco de texto na tela */
+    text-align: left; /* Alinha o texto à esquerda */
+    line-height: 1.8; /* Melhora a legibilidade do texto */
+}
+
+       
+        
+        .notas-title {
+            font-size: 35px;
+            color: white;
+            margin-bottom: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1b1b1b;
+            color: #bdbdbd;
+        }
+        .discord-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #7289da;
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .discord-button:hover {
+            background-color: #5d6bb1;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .info-section, .projeto-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .projeto-card {
+                width: 100%;
+                height: 250px;
+                border: 2px solid #ff6f00;
+            }
+            .banner img {
+                height: 250px;
+                object-fit: cover;
+            }
+            .info-title {#anotacoes {
+    background-color: #121212;
+    color: white;
+    padding: 80px 40px;
+}
+
+.notas-content {
+    font-size: 18px;
+    color: #bdbdbd;
+    max-width: 1200px;
+    margin: 0 auto; /* Para centralizar o bloco de texto na tela */
+    text-align: left; /* Alinha o texto à esquerda */
+    line-height: 1.8; /* Melhora a legibilidade do texto */
+}
+
+                font-size: 32px;
+            }
+            .projeto-container {
+                grid-template-columns: 1fr;
+            }
+            .projeto-card {
+                margin-bottom: 20px;
+            }
+            .projeto-card .text {
+                position: relative;
+                background-color: rgba(0, 0, 0, 0.6);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+            <span>Compass UOL</span>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#projeto">Projeto</a></li>
+                <li><a href="#anotacoes">Notas</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="banner">
+        <img src="capasite.png.png " alt="Banner">
+    </div>
+    
+    <section class="info-section">
+        <div class="info-title">Sobre o <h3>Projeto</h3></div>
+        <div class="info-text">O projeto envolve criar uma infraestrutura na AWS com VPC, instância EC2,
+             servidor Nginx e uma página HTML. A VPC deve ter
+             duas sub-redes públicas e privadas, e a instância EC2 deve usar Ubuntu ou Amazon Linux 2023. O 
+             servidor Nginx será configurado para exibir uma página HTML simples.
+
+            Além disso, será criado um script de monitoramento que verifica a disponibilidade do site a c
+            ada 1 minuto e envia notificações via Discord, Telegram ou Slack se o serviço estiver fora do ar. O script também armazenará logs em /var/log/meu_script.log.
+            
+            Após testar, o processo deve ser documentado no GitHub. Como desafios bônus, a configuração 
+            será automatizada via User Data e um arquivo CloudFormation será criado para provisionar a 
+            infraestrutura automaticamente.
+        </div>
+    </section>
+    
+    <section id="projeto">
+        <div class="info-title">
+        Etapas do Projeto<br>    
+        </div>
+        <div class="projeto-container">
+            <div class="projeto-card">
+                <img src="img1.jpg" alt="Etapa 1">
+                <div class="text">Criar uma VPC com sub-redes públicas e privadas, lançar uma instância EC2 com Ubuntu.</div>
+            </div>
+            <div class="projeto-card">
+                <img src="img2.jpg" alt="Etapa 2">
+                <div class="text">Desenvolver um script que verifica a disponibilidade do site a cada 1 minuto, envia notificações via Discord,</div>
+            </div>
+            <div class="projeto-card">
+                <img src="img3.png" alt="Etapa 3">
+                <div class="text">Testar a implementação, documentar o processo no GitHub e automatizar a configuração via User Data</div>
+            </div>
+        </div>
+    </section>
+  
+        <div id="anotacoes" class="notas-content">
+            <div class="notas-title">Notas</div>
+            <p>Notas sobre o Projeto:
+                Este projeto consiste em uma série de etapas detalhadas para criar e configurar uma infraestrutura na AWS, com foco em ambientes de nuvem e automação de monitoramento. Abaixo estão os principais pontos de cada fase do desenvolvimento:
+                <p>
+                Etapa 1: Configuração do Ambiente
+                A primeira fase do projeto envolve a criação de uma VPC (Virtual Private Cloud) na AWS, configurando duas sub-redes públicas e duas privadas para garantir a segurança e a segmentação adequada do tráfego. Além disso, uma instância EC2 é lançada dentro da sub-rede pública utilizando o sistema operacional Ubuntu ou Amazon Linux 2023, criando a base para o ambiente de servidor.
+            </p>
+                Etapa 2: Configuração do Servidor Web
+                Nessa fase, um servidor Nginx é instalado e configurado na instância EC2. Em seguida, é criada uma página HTML simples, que será exibida pelo Nginx, garantindo que a instância EC2 esteja funcionando corretamente e disponibilizando uma interface básica ao usuário.
+                <p>
+                Etapa 3: Script de Monitoramento + Webhook
+                Aqui, é desenvolvido um script de monitoramento que verifica a cada minuto se o site está ativo. Caso o serviço esteja fora do ar, o script envia uma notificação de falha para canais como Discord, Telegram ou Slack. Além disso, o script armazena logs de execução em um local específico, como /var/log/meu_script.log, para facilitar o acompanhamento e resolução de problemas.
+            </p> <p></p>
+                Etapa 4: Testes e Documentação
+                Após a implementação, é importante realizar testes para garantir que todos os componentes estão funcionando corretamente. A documentação do processo de instalação e configuração é feita no GitHub, com atenção especial para a segurança, a fim de não comprometer dados sensíveis.
+            </p>
+                </p>
+        </div>
+
+    <footer>
+        &copy; 2025 Compass UOL. Todos os direitos reservados.
+    </footer>
+
+    <!-- Discord Button -->
+    <div class="discord-button" onclick="openDiscord()">
+        💬
+    </div>
+
+    <script>
+        function openDiscord() {
+            window.open('https://discord.com/channels/@me/1352682870124187698', '_blank', 'width=400,height=600');
+        }
+    </script>
+</body>
+</html>
