@@ -114,7 +114,7 @@ scp -i chave01.pem -r /home/marjorie/Nginx/site ubuntu@IP_PUBLICO_DA_EC2:/home/u
 ```bash
 sudo chown -R www-data:www-data /var/www/html/projetosite
 sudo chmod -R 755 /var/www/html/site
-```sudo systemctl status nginx
+
 ```
 
 ### 📌 Configurar o Nginx
