@@ -34,7 +34,7 @@ Nesta etapa, vamos configurar a infraestrutura básica na AWS criando uma VPC (V
 <img src="https://github.com/user-attachments/assets/65aa7a8d-5b44-4388-b549-76426b8761ef" alt="Texto alternativo" width="400" />
 <img src="https://github.com/user-attachments/assets/6c2d3d54-dc21-4f78-974b-c6550b80fde2" alt="Texto alternativo" width="400" />
 <img src="https://github.com/user-attachments/assets/ae20d062-fa04-4493-a879-b7002d5f947e" alt="Texto alternativo" width="400" />
-<img src="https://github.com/user-attachments/assets/698421d2-31b3-45be-9b0e-96baf6b4ef93" alt="Texto alternativo" width="400" />
+
 ---
 
 ### Passo 1.1.1: Criar a Instância EC2
@@ -55,6 +55,8 @@ Nesta etapa, vamos configurar a infraestrutura básica na AWS criando uma VPC (V
 <img src="https://github.com/user-attachments/assets/f78a622e-0385-4e92-b001-799a37d377f2" alt="Imagem 3" width="400" />
 <img src="https://github.com/user-attachments/assets/77fc3712-d94b-4311-9334-459e12e9a57e" alt="Imagem 2" width="400" />
 
+-Redes :
+<img src="https://github.com/user-attachments/assets/698421d2-31b3-45be-9b0e-96baf6b4ef93" alt="Texto alternativo" width="400" />
 
 ---
 
