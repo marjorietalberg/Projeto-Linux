@@ -74,6 +74,22 @@ Para configurar o servidor web, precisa acessar a instância EC2 pela linha de c
 
 ```bash
 ssh -i /caminho/para/chaveprojeto.pem ubuntu@3.92.15.199
+```
+
+---
+
+### Instalar o Nginx
+Já dentro da instância, execute:
+```bashsudo systemctl start nginx
+
+sudo apt install nginx -y
+```
+### Iniciar o Nginx
+Após a instalação, inicie o Nginx:
+```bash
+sudo systemctl start nginx
+```
+
 
 
 
