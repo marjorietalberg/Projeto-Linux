@@ -17,4 +17,6 @@ Nesta etapa, vamos configurar a infraestrutura básica na AWS criando uma VPC (V
 - Acesse o Console de Gerenciamento da AWS e vá até o serviço **Amazon VPC**.
 - Crie uma nova **VPC** com o CIDR Block desejado, por exemplo: `10.0.0.0/16`.
 <img src="https://github.com/user-attachments/assets/cac098c5-cb6d-4617-83eb-60684ed7777b" alt="Texto alternativo" width="400" />
+<img src="https://github.com/user-attachments/assets/cac098c5-cb6d-4617-83eb-60684ed7777b" alt="Texto alternativo" width="400" />
+
 
