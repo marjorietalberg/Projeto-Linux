@@ -47,7 +47,7 @@ Para garantir que o Nginx está rodando corretamente, use:
 - Certifique-se de configurar o **grupo de segurança** para permitir o acesso nas portas **22 (SSH)** e **80 (HTTP)**, para acesso remoto e via navegador.
 
 ### Passo 1.1.3: Criar e Baixar a Chave SSH
-- Crie uma **chave SSH** para acessar a instância EC2.
+- Crie uma **chave SSH** para acessar a instância EC2.```
 - Faça o download do arquivo da chave (**.pem**), pois você precisará dela para se conectar à instância.
 
 ### Passo 1.1.4: Lançar a Instância
@@ -90,6 +90,7 @@ Após a instalação, inicie o Nginx:
 ```bash
 sudo systemctl start nginx
 ```
+
 A partir daqui o Nginx já deve estar funcionando dentro da instância criada e pode ser acessado através do navegador com o IP público.
 
 <img src="https://github.com/user-attachments/assets/b4aefdd7-ef30-4051-ad5c-f9329eee2b56" alt="Texto Alternativo" width="400" />
