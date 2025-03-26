@@ -106,7 +106,7 @@ sudo nano /var/www/html/index.html
 ```bash
 scp -i chave01.pem -r /home/marjorie/Nginx/restaurante ubuntu@IP_PUBLICO_DA_EC2:/home/ubuntu/
 ```
-`### juste as permissões:
+### juste as permissões:
 ```bash
 sudo chown -R www-data:www-data /var/www/html/projetosite
 sudo chmod -R 755 /var/www/html/site
