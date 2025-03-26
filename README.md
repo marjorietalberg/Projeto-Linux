@@ -61,7 +61,7 @@ Para garantir que o Nginx está rodando corretamente, use:
 <img src="https://github.com/user-attachments/assets/698421d2-31b3-45be-9b0e-96baf6b4ef93" alt="Texto alternativo" width="400" />
 
 ---
-##  Etapa 2: Configuração do Servidor Web (Nginx)
+## 📌 Etapa 2: Configuração do Servidor Web (Nginx)
 
 ### 2.1 Acessar a Instância via SSH
 
@@ -75,7 +75,7 @@ ssh -i /caminho/para/chaveprojeto.pem ubuntu@3.92.15.199
 
 ---
 
-### 📌 Instalar o Nginx
+### Instalar o Nginx
 Já dentro da instância, execute:
 ```bash
 sudo apt install nginx -y
@@ -98,7 +98,7 @@ sudo systemctl start nginx
 
 <img src="https://github.com/user-attachments/assets/b4aefdd7-ef30-4051-ad5c-f9329eee2b56" alt="Texto Alternativo" width="400" />
 
-### 📌  Etapa 4: Criar o Site HTML
+### 📌 Criar o Site HTML
 
 Agora que o servidor Nginx está configurado, vamos criar a página HTML que será exibida no seu servidor.
 
