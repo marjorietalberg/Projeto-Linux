@@ -155,12 +155,11 @@ sudo systemctl enable nginx
 <img src="https://github.com/user-attachments/assets/ca9615ed-335e-458e-9f3e-a5383fde2992" alt="Imagem 2" width="400"/>
 
 ---
-###  📌 Torne o script executável:
+###   Torne o script executável:
 ```bash
 chmod +x monitor_site.sh
 ```
-### Passo 3.2: Agendar a Execução do Script
-Para rodar o script periodicamente, você pode usar o cron no Linux. O cron permite que você agende a execução de comandos ou scripts em intervalos regulares.
+### Para rodar o script periodicamente, você pode usar o cron no Linux. O cron permite que você agende a execução de comandos ou scripts em intervalos regulares.
 
 ### Criar um Bot no Telegram
 
@@ -183,7 +182,7 @@ Crie o arquivo de script no seu servidor. No seu terminal SSH, crie um arquivo d
 ```bash
 nano monitor_site.sh
 ```
-### Adicione o conteúdo do script. Aqui está um exemplo de script que verifica se o site está respondendo e envia uma notificação via Discord:
+### Adicione o conteúdo do script.
 ```bash
 #!/bin/bash
 #!/bin/bash
