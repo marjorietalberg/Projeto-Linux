@@ -134,6 +134,61 @@ sudo systemctl restart nginx
 <img src="https://github.com/user-attachments/assets/a1a11a29-ee46-4c31-89a0-720df0475e8c" alt="Imagem 4" width="400"/>
 <img src="https://github.com/user-attachments/assets/ca9615ed-335e-458e-9f3e-a5383fde2992" alt="Imagem 2" width="400"/>
 
+---
+### Passo 3.1: Criar o Script de Monitoramento
+Crie o arquivo de script no seu servidor. No seu terminal SSH, crie um arquivo de script, como
+```bash
+nano monitor_site.sh
+```
+### Adicione o conteúdo do script. Aqui está um exemplo de script que verifica se o site está respondendo e envia uma notificação via Discord:
+```bash
+#!/bin/bash
+
+# URL do site a ser monitorado
+URL="http://localhost"
+
+# Webhook do Discord
+WEBHOOK_URL="https://discord.com/api/webhooks/your-webhook-id"
+
+# Enviar uma notificação de falha para o Discord
+send_notification() {
+    curl -X POST -H "Content-Type: application/json" \
+    -d "{\"content\": \"O site não está respondendo!\"}" \
+    $WEBHOOK_URL
+}
+
+# Verificar o status do site
+check_status() {
+    http_status=$(curl -s -o /dev/null -w "%{http_code}" $URL)
+    if [ $http_status -ne 200 ]; then
+        send_notification
+    fi
+}
+
+# Chama a função de verificação
+check_status
+
+```
+
+URL: Coloque a URL do seu site. Se for uma instância EC2, pode ser http://localhost ou o IP público.
+
+WEBHOOK_URL: Substitua por seu webhook do Discord.
+### Torne o script executável:
+```bash
+chmod +x monitor_site.sh
+```
+### Passo 3.2: Agendar a Execução do Script
+Para rodar o script periodicamente, você pode usar o cron no Linux. O cron permite que você agende a execução de comandos ou scripts em intervalos regulares.
+
+1.Edite o arquivo de configuração do cron:
+```bash
+crontab -e
+```
+2.Adicione uma linha para rodar o script a cada 1 minuto:
+
+```bash
+* * * * * /caminho/para/monitor_site.sh
+```
 
 
 
