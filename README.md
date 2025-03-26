@@ -95,6 +95,9 @@ sudo systemctl start nginx
 
 
 <img src="https://github.com/user-attachments/assets/b4aefdd7-ef30-4051-ad5c-f9329eee2b56" alt="Texto Alternativo" width="400" />
+o Nginx já deve estar funcionando dentro da instância criada e pode ser acessado através do navegador com o IP público.
+
+
 
 ### 📌 Criar o Site HTML
 
