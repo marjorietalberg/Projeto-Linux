@@ -104,7 +104,7 @@ sudo nano /var/www/html/index.html
 ```
 ### Transferir o Arquivo do Diretório Local para a Instância EC2
 ```bash
-scp -i chave01.pem -r /home/marjorie/Nginx/restaurante ubuntu@IP_PUBLICO_DA_EC2:/home/ubuntu/
+scp -i chave01.pem -r /home/marjorie/Nginx/site ubuntu@IP_PUBLICO_DA_EC2:/home/ubuntu/
 ```
 ### juste as permissões:
 ```bash
