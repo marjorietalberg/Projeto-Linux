@@ -89,10 +89,44 @@ Após a instalação, inicie o Nginx:
 ```bash
 sudo systemctl start nginx
 ```
+<img src="https://github.com/user-attachments/assets/b4aefdd7-ef30-4051-ad5c-f9329eee2b56" alt="Texto Alternativo" width="400" />
 
+### Etapa 4: Criar o Site HTML
 
+Agora que o servidor Nginx está configurado, vamos criar a página HTML que será exibida no seu servidor.
 
+### Passo 4.1: Criar o Arquivo HTML
 
+Crie o arquivo HTML no diretório padrão do Nginx com o comando:
+
+```bash
+sudo nano /var/www/html/index.html
+```
+### Transferir o Arquivo do Diretório Local para a Instância EC2
+```bash
+scp -i chave01.pem -r /home/marjorie/Nginx/restaurante ubuntu@IP_PUBLICO_DA_EC2:/home/ubuntu/
+```
+`### juste as permissões:
+```bash
+sudo chown -R www-data:www-data /var/www/html/projetosite
+sudo chmod -R 755 /var/www/html/site
+```
+
+### Configurar o Nginx
+Após a transferência dos arquivos, edite o arquivo de configuração do Nginx para apontar para o diretório onde os arquivos do seu site estão armazenados:
+```bash
+sudo nano /etc/nginx/sites-available/default
+```
+### Testar e Reiniciar o Nginx
+Verifique se a configuração do Nginx está correta:
+
+```bash
+sudo nginx -t
+```
+### Reinicie o Nginx:
+```bash
+sudo systemctl restart nginx
+```
 
 
 
