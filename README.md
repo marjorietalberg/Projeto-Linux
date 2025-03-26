@@ -115,7 +115,7 @@ scp -i chave01.pem -r /home/marjorie/Nginx/site ubuntu@IP_PUBLICO_DA_EC2:/home/u
 ```bash
 sudo chown -R www-data:www-data /var/www/html/projetosite
 sudo chmod -R 755 /var/www/html/site
-```
+```sudo systemctl status nginx
 
 ### 📌 Configurar o Nginx
 Após a transferência dos arquivos, edite o arquivo de configuração do Nginx para apontar para o diretório onde os arquivos do seu site estão armazenados:
@@ -143,9 +143,9 @@ sudo systemctl status nginx
 <img src="https://github.com/user-attachments/assets/5ed1981e-aaad-4315-95dd-a6e565f23f0d" alt="Descrição da Imagem" width="400">
 
 ###  Habilitar o Nginx para Inicialização Automática
-Caso queira que o Nginx inicie automaticamente junto com o sistema:
 ```bash
 sudo systemctl enable nginx
+
 ```
 
 ### Site 
