@@ -8,7 +8,7 @@
 2. **Implantação do Servidor Web e Automação de Monitoramento**
 3. **Criação de Sistema de Monitoramento e Notificação**
 4. **Testes, Documentação e Desafios de Automação**
-
+---
 
 ### Passo 1.1: Criar a VPC
 
