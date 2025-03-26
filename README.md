@@ -64,6 +64,18 @@ Nesta etapa, vamos configurar a infraestrutura básica na AWS criando uma VPC (V
 <img src="https://github.com/user-attachments/assets/698421d2-31b3-45be-9b0e-96baf6b4ef93" alt="Texto alternativo" width="400" />
 
 ---
+##  Etapa 2: Configuração do Servidor Web (Nginx)
+
+### 2.1 Acessar a Instância via SSH
+
+Para configurar o servidor web, precisa acessar a instância EC2 pela linha de comando via SSH.
+### Passo 2.1.1: Conectar-se à Instância EC2
+- No terminal local, utilize o seguinte comando SSH para acessar a instância. Lembre-se de substituir o **[Caminho_da_chave.pem]** pelo caminho correto do arquivo da chave SSH que você baixou e **[IP_da_instância]** pelo IP público da sua instância EC2:
+
+```bash
+ssh -i /caminho/para/chaveprojeto.pem ubuntu@3.92.15.199
+
+
 
 
 
