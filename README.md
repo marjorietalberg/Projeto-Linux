@@ -80,9 +80,12 @@ ssh -i /caminho/para/chaveprojeto.pem ubuntu@3.92.15.199
 
 ### Instalar o Nginx
 Já dentro da instância, execute:
-```bashsudo systemctl start nginx
-
+```bash
 sudo apt install nginx -y
+```
+ou 
+```bash
+sudo apt update && sudo apt install nginx -y
 ```
 ### Iniciar o Nginx
 Após a instalação, inicie o Nginx:
