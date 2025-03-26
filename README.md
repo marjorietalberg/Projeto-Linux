@@ -2,16 +2,13 @@
 ## **Configuração do Ambiente e Infraestrutura na AWS**
 
 
-# 📍 Índice das Etapas
+# 📌  Índice das Etapas
 
 1. **Configuração do Ambiente e Infraestrutura na AWS**
 2. **Implantação do Servidor Web e Automação de Monitoramento**
 3. **Criação de Sistema de Monitoramento e Notificação**
 4. **Testes, Documentação e Desafios de Automação**
 
-.0 Criar uma VPC com 2 Sub-redes Públicas e 2 Privadas
-
-Nesta etapa, vamos configurar a infraestrutura básica na AWS criando uma VPC (Virtual Private Cloud) com sub-redes públicas e privadas.
 
 ### Passo 1.1: Criar a VPC
 
@@ -78,7 +75,7 @@ ssh -i /caminho/para/chaveprojeto.pem ubuntu@3.92.15.199
 
 ---
 
-### Instalar o Nginx
+### 📌 Instalar o Nginx
 Já dentro da instância, execute:
 ```bash
 sudo apt install nginx -y
@@ -96,7 +93,7 @@ A partir daqui o Nginx já deve estar funcionando dentro da instância criada e 
 
 <img src="https://github.com/user-attachments/assets/b4aefdd7-ef30-4051-ad5c-f9329eee2b56" alt="Texto Alternativo" width="400" />
 
-### Etapa 4: Criar o Site HTML
+### 📌  Etapa 4: Criar o Site HTML
 
 Agora que o servidor Nginx está configurado, vamos criar a página HTML que será exibida no seu servidor.
 
