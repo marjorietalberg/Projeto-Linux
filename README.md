@@ -114,11 +114,13 @@ sudo chown -R www-data:www-data /var/www/html/projetosite
 sudo chmod -R 755 /var/www/html/site
 ```
 
-### Configurar o Nginx
+###📌 Configurar o Nginx
 Após a transferência dos arquivos, edite o arquivo de configuração do Nginx para apontar para o diretório onde os arquivos do seu site estão armazenados:
 ```bash
 sudo nano /etc/nginx/sites-available/default
 ```
+💡 Dica: Dentro do arquivo, altere a linha root /var/www/html; para o diretório correto onde seu site está localizado.
+
 ### Testar e Reiniciar o Nginx
 Verifique se a configuração do Nginx está correta:
 
