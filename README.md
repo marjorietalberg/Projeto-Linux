@@ -187,7 +187,6 @@ nano monitor_site.sh
 ### Adicione o conteúdo do script.
 ```bash
 #!/bin/bash
-#!/bin/bash
 
 # Defina as variáveis
 URL="http://3.92.15.199"   # IP público da sua EC2
@@ -207,7 +206,7 @@ fi
 
 # Função para registrar logs
 log_message() {
-    TIMESTAMP=$(date "+%Y-%m-%d %H:%M:%S")  # Data e hora exata
+    TIMESTAMP=$(TZ="America/Sao_Paulo" date "+%Y-%m-%d %H:%M:%S")  # Hora exata em Brasília
     echo "$TIMESTAMP - $1" >> $LOG_FILE
 }
 
@@ -218,9 +217,23 @@ send_notification() {
     }' $WEBHOOK_URL
 }
 
+# Criar um arquivo de controle para parar o script manualmente
+CONTROL_FILE="/tmp/monitorar_site_running"
+
+# Função para verificar se o script deve continuar
+check_stop() {
+    if [ -f "$CONTROL_FILE" ]; then
+        echo "O script foi interrompido manualmente."
+        rm -f "$CONTROL_FILE"
+        exit 0
+    fi
+}
+
 # Loop infinito para monitorar o site
 while true; do
-    TIMESTAMP=$(date "+%d/%m/%Y %H:%M:%S")  # Formato de data e hora BR (dia/mês/ano hora:min:seg)
+    check_stop  # Verifica se o controle de parada existe
+
+    TIMESTAMP=$(TZ="America/Sao_Paulo" date "+%d/%m/%Y %H:%M:%S")  # Formato de data e hora BR (dia/mês/ano hora:min:seg)
     
     # Verifica o status do site
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" $URL)
@@ -241,7 +254,6 @@ while true; do
     # Espera 60 segundos antes de rodar de novo
     sleep 60
 done
-
 
 
 ```
