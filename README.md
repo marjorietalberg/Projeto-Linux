@@ -143,7 +143,6 @@ sudo systemctl restart nginx
 Para garantir que o Nginx está rodando corretamente, use:
 ```bash
 sudo systemctl status nginx
-A partir daqui você já deve ver o seu site customizado no Nginx:
 ```
 <img src="https://github.com/user-attachments/assets/5ed1981e-aaad-4315-95dd-a6e565f23f0d" alt="Descrição da Imagem" width="400">
 
