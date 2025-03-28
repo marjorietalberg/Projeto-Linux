@@ -188,9 +188,9 @@ nano monitor_site.sh
 #!/bin/bash
 
 # Defina as variáveis
-URL="http://3.92.15.199"   # IP público da sua EC2
-WEBHOOK_URL="https://discord.com/api/webhooks/1352682870124187698/nFnBeaAeKRICnG0ksI25zqpGu6ZCmVMVgz3zxFPs1pACvJwB3uwuNq8AMFlselzeWDB5"  # Webhook do Discord
-PUBLIC_IP="3.92.15.199"    # IP público da sua EC2
+URL="http://"   # IP público da sua EC2
+WEBHOOK_URL="https://discord.com/api/webhooks/  # Webhook do Discord
+PUBLIC_IP=""    # IP público da sua EC2
 LOG_FILE="/var/log/site_script.log"  # Caminho do log
 TZ="America/Sao_Paulo"  # Fuso horário para o Brasil (ajuste conforme necessário)
 
