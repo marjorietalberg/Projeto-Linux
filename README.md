@@ -191,7 +191,6 @@ WEBHOOK_URL="SEU_WEBHOOK_DISCORD"  # Substitua pelo seu webhook do Discord
 LOG_FILE="/var/log/site_script.log"
 TZ="America/Sao_Paulo"
 
-# Define o fuso horário para garantir a hora correta
 export TZ=$TZ
 
 # Cria o arquivo de log se não existir e define permissões
@@ -200,7 +199,7 @@ if [ ! -f "$LOG_FILE" ]; then
     sudo chmod 666 $LOG_FILE  # Permite que qualquer usuário escreva no log
 fi
 
-# Função para registrar mensagens no log
+
 deslog_message() {
     TIMESTAMP=$(date "+%Y-%m-%d %H:%M:%S")
     echo "$TIMESTAMP - $1" >> $LOG_FILE
@@ -213,15 +212,15 @@ send_notification() {
     }' $WEBHOOK_URL
 }
 
-# Inicializa a última hora registrada para evitar mensagens duplicadas
+
 LAST_SENT=""
 
-# Loop infinito para monitoramento
+
 while true; do
-    # Obtém a hora e minuto atual no formato HH:MM
+
     CURRENT_TIME=$(date "+%H:%M")
     
-    # Só envia mensagem se o minuto tiver mudado
+
     if [[ "$CURRENT_TIME" != "$LAST_SENT" ]]; then
         LAST_SENT="$CURRENT_TIME"
         
