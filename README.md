@@ -182,73 +182,69 @@ nano monitor_site.sh
 ```
 ### Adicione o conteúdo do script.
 ```bash
+
 #!/bin/bash
 
-# Defina as variáveis
-URL="http://"   # IP público da sua EC2
-WEBHOOK_URL="https://discord.com/api/webhooks/  # Webhook do Discord
-PUBLIC_IP=""    # IP público da sua EC2
-LOG_FILE="/var/log/site_script.log"  # Caminho do log
-TZ="America/Sao_Paulo"  # Fuso horário para o Brasil (ajuste conforme necessário)
+# Definição das variáveis
+URL="http://SEU_IP_PUBLICO"  # Substitua pelo IP real do seu site
+WEBHOOK_URL="SEU_WEBHOOK_DISCORD"  # Substitua pelo seu webhook do Discord
+LOG_FILE="/var/log/site_script.log"
+TZ="America/Sao_Paulo"
 
-# Configura o fuso horário corretamente
+# Define o fuso horário para garantir a hora correta
 export TZ=$TZ
 
-# Criar o arquivo de log se não existir
+# Cria o arquivo de log se não existir e define permissões
 if [ ! -f "$LOG_FILE" ]; then
-    sudo touch $LOG_FILE
-    sudo chmod 666 $LOG_FILE
+    sudo touch $LOG_FILE  # Cria o arquivo de log
+    sudo chmod 666 $LOG_FILE  # Permite que qualquer usuário escreva no log
 fi
 
-# Função para registrar logs
-log_message() {
-    TIMESTAMP=$(TZ="America/Sao_Paulo" date "+%Y-%m-%d %H:%M:%S")  # Hora exata em Brasília
+# Função para registrar mensagens no log
+deslog_message() {
+    TIMESTAMP=$(date "+%Y-%m-%d %H:%M:%S")
     echo "$TIMESTAMP - $1" >> $LOG_FILE
 }
 
-# Função para enviar mensagem ao Discord
+# Função para enviar notificações para o Discord
 send_notification() {
     curl -X POST -H "Content-Type: application/json" -d '{
-        "content": "'"$1"'"
+        "content": "'$1'"
     }' $WEBHOOK_URL
 }
 
-# Criar um arquivo de controle para parar o script manualmente
-CONTROL_FILE="/tmp/monitorar_site_running"
+# Inicializa a última hora registrada para evitar mensagens duplicadas
+LAST_SENT=""
 
-# Função para verificar se o script deve continuar
-check_stop() {
-    if [ -f "$CONTROL_FILE" ]; then
-        echo "O script foi interrompido manualmente."
-        rm -f "$CONTROL_FILE"
-        exit 0
-    fi
-}
-
-# Loop infinito para monitorar o site
+# Loop infinito para monitoramento
 while true; do
-    check_stop  # Verifica se o controle de parada existe
-
-    TIMESTAMP=$(TZ="America/Sao_Paulo" date "+%d/%m/%Y %H:%M:%S")  # Formato de data e hora BR (dia/mês/ano hora:min:seg)
+    # Obtém a hora e minuto atual no formato HH:MM
+    CURRENT_TIME=$(date "+%H:%M")
     
-    # Verifica o status do site
-    HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" $URL)
+    # Só envia mensagem se o minuto tiver mudado
+    if [[ "$CURRENT_TIME" != "$LAST_SENT" ]]; then
+        LAST_SENT="$CURRENT_TIME"
+        
+        # Verifica o status HTTP do site
+        HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" $URL)
+        TIMESTAMP=$(date "+%d/%m/%Y %H:%M:%S")
 
-    if [ "$HTTP_STATUS" -eq 200 ]; then
-        # Mensagem quando o site está no ar
-        MESSAGE="🎉 **Seu site está no ar!** 🎉\n\n🌐 O site com IP **$PUBLIC_IP** está funcionando corretamente.\n✅ Status HTTP: **200**\n⏰ Verificado em: **$TIMESTAMP**."
-        log_message "Site no ar - Status: 200"
-    else
-        # Mensagem quando o site está fora do ar
-        MESSAGE="⚠️ **Alerta!** Seu site está fora do ar! ⚠️\n\n🚨 O site **$URL** (IP: $PUBLIC_IP) não está respondendo corretamente.\n❌ Status HTTP: **$HTTP_STATUS**\n⏰ Verificado em: **$TIMESTAMP**."
-        log_message "Site fora do ar - Status: $HTTP_STATUS"
+        if [ "$HTTP_STATUS" -eq 200 ]; then
+            MESSAGE="🎉 Site online - ⏰ $TIMESTAMP"
+            deslog_message "Site no ar - Status: 200"
+        else
+            MESSAGE="⚠️ Site offline - ⏰ $TIMESTAMP"
+            deslog_message "Site fora do ar - Status: $HTTP_STATUS"
+            
+            # Tenta reiniciar o Nginx automaticamente se o site estiver fora do ar
+            sudo systemctl restart nginx
+            deslog_message "Nginx reiniciado automaticamente"
+        fi
+
+        send_notification "$MESSAGE"
     fi
-
-    # Envia a notificação para o Discord
-    send_notification "$MESSAGE"
-
-    # Espera 60 segundos antes de rodar de novo
-    sleep 60
+    
+    sleep 10  # Verifica a cada 10s, mas só envia se mudar o minuto
 done
 
 
