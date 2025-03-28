@@ -57,10 +57,7 @@ Para garantir que o Nginx está rodando corretamente, use:
 
 ---
 
-### Redes:
-<img src="https://github.com/user-attachments/assets/698421d2-31b3-45be-9b0e-96baf6b4ef93" alt="Texto alternativo" width="400" />
 
----
 ## 📌 Etapa 2: Configuração do Servidor Web (Nginx)
 
 ### 2.1 Acessar a Instância via SSH
