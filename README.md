@@ -1,3 +1,7 @@
+<p align="center">
+  <br>
+  <img src="https://github.com/user-attachments/assets/79a2e995-a1be-4192-9ded-771004ef7417" alt="CompassUOL Logo" width="250">
+</p>
 
 ## **Configuração do Ambiente e Infraestrutura na AWS**
 
