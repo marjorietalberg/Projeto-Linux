@@ -3,63 +3,115 @@
   <img src="https://github.com/user-attachments/assets/79a2e995-a1be-4192-9ded-771004ef7417" alt="CompassUOL Logo" width="250">
 </p>
 
-## **Configuração do Ambiente e Infraestrutura na AWS**
+#  Configuração do Ambiente e Infraestrutura na AWS
 
+![AWS](https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
+![Nginx](https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white)
 
-# 📌  Índice das Etapas
-
-1. **Configuração do Ambiente e Infraestrutura na AWS**
-2. **Implantação do Servidor Web e Automação de Monitoramento**
-3. **Criação de Sistema de Monitoramento e Notificação**
-4. **Testes, Documentação e Desafios de Automação**
 ---
 
-### Passo 1.1: Criar a VPC
+## 📌 Índice
 
-- Acesse o Console de Gerenciamento da AWS e vá até o serviço **Amazon VPC**.
-- Crie uma nova **VPC** com o CIDR Block desejado, por exemplo: `10.0.0.0/16`.
-### Passo 1.2: Criar Sub-redes Públicas e Privadas, e Tabelas de Roteamento
-- Crie **duas sub-redes públicas** e **duas sub-redes privadas** em diferentes **zonas de disponibilidade (AZs)**.
-- **Sub-redes públicas**: terão acesso à Internet por meio de um **Internet Gateway**.
-- **Sub-redes privadas**: não terão acesso direto à Internet, mas poderão se comunicar com a Internet por meio de um **NAT Gateway** (se necessário).
-Para garantir que o Nginx está rodando corretamente, use:
+1. [Configuração da VPC e Sub-redes](#1-configuração-da-vpc-e-sub-redes)
+2. [Criação da Instância EC2](#2-criação-da-instância-ec2)
+3. [Configuração do Servidor Web (Nginx)](#3-configuração-do-servidor-web-nginx)
+4. [Criação do Site HTML](#4-criação-do-site-html)
+5. [Monitoramento e Notificações](#5-monitoramento-e-notificações)
+
+---
+### 🌐 Passo 1.1: Criar a VPC
+
+- Acesse o **Console de Gerenciamento da AWS** ![AWS](https://img.shields.io/badge/AWS-FF9900?style=flat-square&logo=amazon-aws&logoColor=white) e vá até o serviço **Amazon VPC**.  
+- Crie uma nova **VPC** com o **CIDR Block** desejado, por exemplo: `10.0.0.0/16`.  
+
+> 💡 **Dica:** A VPC é a rede principal da sua infraestrutura, garantindo isolamento e controle de tráfego.
+
+---
+
+### 🏗️ Passo 1.2: Criar Sub-redes Públicas e Privadas, e Tabelas de Roteamento
+
+- Crie **duas sub-redes públicas** e **duas sub-redes privadas** em diferentes **zonas de disponibilidade (AZs)**.  
+- **Sub-redes públicas:** acesso à Internet via **Internet Gateway (IGW)**  
+- **Sub-redes privadas:** sem acesso direto à Internet, mas com comunicação via **NAT Gateway** se necessário  
+
+**Tabela resumida das sub-redes:**
+
+| Tipo de Sub-rede | Gateway          | Acesso à Internet | Observação |
+|-----------------|-----------------|-----------------|------------|
+| Pública 🌐       | Internet Gateway | Sim             | Para servidores web acessíveis externamente |
+| Privada 🔒       | NAT Gateway      | Sim (via NAT)   | Para servidores internos ou bancos de dados |
+
 - Crie uma **tabela de roteamento** para cada sub-rede:
-  - Para as **sub-redes públicas**, associe a tabela de roteamento ao **Internet Gateway**, garantindo que as sub-redes públicas tenham acesso à Internet.
-  - Para as **sub-redes privadas**, associe a tabela de roteamento ao **NAT Gateway**, garantindo que as sub-redes privadas possam acessar a Internet de forma segura.
-
-### Passo 1.3: Associar Tabelas de Roteamento às Sub-redes
-- Após criar as tabelas de roteamento, associe cada uma delas à sub-rede correspondente, garantindo que as sub-redes públicas possam acessar a Internet diretamente e que as privadas possam acessar a Internet por meio do NAT Gateway (se configurado).
+  - **Sub-redes públicas:** associe ao **Internet Gateway**, garantindo acesso direto à Internet.  
+  - **Sub-redes privadas:** associe ao **NAT Gateway**, garantindo acesso seguro à Internet.
 
 ---
-<img src="https://github.com/user-attachments/assets/cac098c5-cb6d-4617-83eb-60684ed7777b" alt="Texto alternativo" width="400" />
-<img src="https://github.com/user-attachments/assets/65aa7a8d-5b44-4388-b549-76426b8761ef" alt="Texto alternativo" width="400" />
-<img src="https://github.com/user-attachments/assets/6c2d3d54-dc21-4f78-974b-c6550b80fde2" alt="Texto alternativo" width="400" />
-<img src="https://github.com/user-attachments/assets/ae20d062-fa04-4493-a879-b7002d5f947e" alt="Texto alternativo" width="400" />
+
+### 🔗 Passo 1.3: Associar Tabelas de Roteamento às Sub-redes
+
+- Após criar as tabelas de roteamento, associe cada uma à **sub-rede correspondente**.  
+- Certifique-se de que:
+  - Sub-redes públicas → acesso direto à Internet  
+  - Sub-redes privadas → acesso à Internet via NAT Gateway (se configurado)  
+
+> ✅ **Resumo visual do fluxo de roteamento:**  
+> - 🌐 IGW → Sub-redes públicas  
+> - 🔒 NAT → Sub-redes privadas
+---
+
+
+### Imagens da Criação da VPC
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/cac098c5-cb6d-4617-83eb-60684ed7777b" alt="Imagem 1" width="400" />
+  <img src="https://github.com/user-attachments/assets/65aa7a8d-5b44-4388-b549-76426b8761ef" alt="Imagem 2" width="400" />
+  <img src="https://github.com/user-attachments/assets/6c2d3d54-dc21-4f78-974b-c6550b80fde2" alt="Imagem 3" width="400" />
+  <img src="https://github.com/user-attachments/assets/ae20d062-fa04-4493-a879-b7002d5f947e" alt="Imagem 4" width="400" />
+</p>
 
 ---
-### Fluxo:
-<img src="https://github.com/user-attachments/assets/e9e101da-83f7-4ce7-9f16-85237b9d44e0" alt="Imagem" width="400" />
+
+### 🔄 Visualizando o Fluxo :
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/e9e101da-83f7-4ce7-9f16-85237b9d44e0" alt="Fluxo do Projeto" width="600" />
+</p>
+
+
+### 🖥️ Passo 1.1.1: Criar a Instância EC2
+
+- Acesse o **Console de Gerenciamento da AWS** ![AWS](https://img.shields.io/badge/AWS-FF9900?style=flat-square&logo=amazon-aws&logoColor=white) e vá até o serviço **EC2**.  
+- Clique em **Launch Instance** e escolha a **imagem de máquina (AMI)** desejada: **Ubuntu** ou **Amazon Linux 2023**.  
+- Selecione o **tipo de instância**, como **t2.micro** (adequada para testes).  
 
 ---
-### Passo 1.1.1: Criar a Instância EC2
-- Acesse o Console de Gerenciamento da AWS e vá até o serviço **EC2**.
-- Clique em **Launch Instance** e escolha a **imagem de máquina** (AMI) desejada: **Ubuntu** ou **Amazon Linux 2023**.
-- Selecione o tipo de instância, como **t2.micro** (para testes).
 
-### Passo 1.1.2: Configurar a Instância
-- Escolha a **VPC** que você criou na etapa anterior e associe a instância a uma **sub-rede pública**.
-- Certifique-se de configurar o **grupo de segurança** para permitir o acesso nas portas **22 (SSH)** e **80 (HTTP)**, para acesso remoto e via navegador.
+### ⚙️ Passo 1.1.2: Configurar a Instância
 
-### Passo 1.1.3: Criar e Baixar a Chave SSH
-- Crie uma **chave SSH** para acessar a instância EC2.
-- Faça o download do arquivo da chave (**.pem**), pois você precisará dela para se conectar à instância.
-
-### Passo 1.1.4: Lançar a Instância
-- Revise as configurações e clique em **Launch** para iniciar a instância EC2.
-<img src="https://github.com/user-attachments/assets/f78a622e-0385-4e92-b001-799a37d377f2" alt="Imagem 3" width="400" />
-<img src="https://github.com/user-attachments/assets/77fc3712-d94b-4311-9334-459e12e9a57e" alt="Imagem 2" width="400" />
+- Escolha a **VPC** que você criou anteriormente e associe a instância a uma **sub-rede pública**.  
+- Configure o **grupo de segurança** para permitir acesso nas portas:
+  - **22 (SSH)** → acesso remoto via terminal  
+  - **80 (HTTP)** → acesso via navegador  
 
 ---
+
+### 🔑 Passo 1.1.3: Criar e Baixar a Chave SSH
+
+- Crie uma **chave SSH** para acessar sua instância EC2.  
+- Faça o download do arquivo **.pem**, pois será necessário para conexão via SSH.  
+
+> 💡 **Dica:** Mantenha a chave em um local seguro. Sem ela, você não conseguirá acessar a instância.  
+
+---
+
+### 🚀 Passo 1.1.4: Lançar a Instância
+
+- Revise todas as configurações e clique em **Launch** para iniciar a instância EC2.  
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/f78a622e-0385-4e92-b001-799a37d377f2" alt="Instância EC2 1" width="400" />
+  <img src="https://github.com/user-attachments/assets/77fc3712-d94b-4311-9334-459e12e9a57e" alt="Instância EC2 2" width="400" />
+</p>
 
 
 ## 📌 Etapa 2: Configuração do Servidor Web (Nginx)
@@ -95,7 +147,7 @@ sudo systemctl start nginx
 
 
 
-<img src="https://github.com/user-attachments/assets/b4aefdd7-ef30-4051-ad5c-f9329eee2b56" alt="Texto Alternativo" width="400" />
+<img src="https://github.com/user-attachments/assets/b4aefdd7-ef30-4051-ad5c-f9329eee2b56" alt="Texto Alternativo" width="500" />
 
 
 
@@ -153,21 +205,30 @@ sudo systemctl enable nginx
 
 ```
 
-### A partir daqui você já deve ver o seu site customizado no Nginx:
-<img src="https://github.com/user-attachments/assets/a1a11a29-ee46-4c31-89a0-720df0475e8c" alt="Imagem 4" width="400"/>
-<img src="https://github.com/user-attachments/assets/64ce1dc4-33b2-413c-9185-dde97f3d1971" alt="Imagem 1" width="400"/>
-<img src="https://github.com/user-attachments/assets/f1285107-2fbc-48bb-8a69-022478ff4d3a" alt="Imagem 3" width="400"/>
-<img src="https://github.com/user-attachments/assets/ca9615ed-335e-458e-9f3e-a5383fde2992" alt="Imagem 2" width="400"/>
+### 🌐 Visualizando o Site Modelo no Nginx
+
+A partir deste ponto, você deve conseguir acessar o seu **site customizado** no servidor Nginx.  
+Este site é um **modelo** que demonstra **design com imagens e frases**, pronto para personalização.  
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/a1a11a29-ee46-4c31-89a0-720df0475e8c" alt="Design do Site 1" width="380" />
+  <img src="https://github.com/user-attachments/assets/64ce1dc4-33b2-413c-9185-dde97f3d1971" alt="Design do Site 2" width="400" />
+  <img src="https://github.com/user-attachments/assets/f1285107-2fbc-48bb-8a69-022478ff4d3a" alt="Design do Site 3" width="400" />
+  <img src="https://github.com/user-attachments/assets/ca9615ed-335e-458e-9f3e-a5383fde2992" alt="Design do Site 4" width="400" />
+</p>
+
+
+### ⏱️ Rodando o Script Periodicamente com Cron
+
+No Linux, você pode usar o **cron** para agendar a execução de comandos ou scripts em intervalos regulares.  
+Isso garante que o script de monitoramento do site rode automaticamente sem intervenção manual.
 
 ---
 
-### Para rodar o script periodicamente, você pode usar o cron no Linux. O cron permite que você agende a execução de comandos ou scripts em intervalos regulares.
+### 🤖 Criar um Bot no Telegram
 
-### Criar um Bot no Telegram
+1. No Telegram, procure por **@BotFather** e crie um novo bot usando o comando:
 
-1. No Telegram, procure por **@BotFather** e crie um novo bot utilizando o comando `/newbot`.
-2. Ao criar o bot, você receberá um token único que será necessário para interagir com a API do Telegram. **Anote o token**, pois você precisará dele posteriormente. Exemplo de token:
-   
    ```bash
    7747984152:AAEuMnwI7GCiWPHiWodhrudYSDIOPiAXPPE`.
    ```
@@ -270,14 +331,22 @@ crontab -e
 * * * * * /caminho/para/monitor_site.sh
 ```
 
-Imagem da Notificação do Site no Discord
+### 📢 Notificação do Site no Discord
 
-🔍 O script de monitoramento verifica o status do site a cada minuto. Se o site estiver fora do ar, ele envia uma mensagem para o canal do Discord usando um Webhook do Discord. O script faz uma requisição HTTP para o site, e caso detecte falha, envia uma mensagem formatada com detalhes sobre o problema via uma URL de webhook configurada no Discord. Isso permite que os administradores sejam notificados automaticamente sobre a indisponibilidade do site.
+O script de monitoramento verifica o **status do site** a cada minuto.  
+Se o site estiver **fora do ar**, ele envia uma mensagem diretamente para o canal do Discord usando um **Webhook**.  
 
----
-<img src="https://github.com/user-attachments/assets/3f5f79c7-74fa-47ea-815b-600bc4702aec" alt="Imagem do Site" />
+Como funciona:
 
+1. O script faz uma **requisição HTTP** para o site.
+2. Caso detecte falha, envia uma mensagem formatada com detalhes do problema para o **Discord**.
+3. Isso permite que os administradores sejam **notificados automaticamente** sobre qualquer indisponibilidade do site.
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/3f5f79c7-74fa-47ea-815b-600bc4702aec" alt="Notificação do Discord" width="400" />
+</p>
+
+> 💡 **Dica:** Esse mecanismo de alerta garante que você possa agir rapidamente caso o site saia do ar, mantendo a disponibilidade do serviço.
 
 
 
