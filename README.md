@@ -205,7 +205,7 @@ sudo systemctl enable nginx
 
 ```
 
-### 🌐 Visualizando o Site Modelo no Nginx
+## Demonstração do Site Modelo Hospedado no Nginx
 
 A partir deste ponto, você deve conseguir acessar o seu **site customizado** no servidor Nginx.  
 Este site é um **modelo** que demonstra **design com imagens e frases**, pronto para personalização.  
